@@ -1,3 +1,4 @@
+// eventEmitter 类是观察者模式的实现
 // 1 继承
 var util = require('util')
 var events = require('events')
@@ -144,3 +145,50 @@ var events = require('events')
 // pulsar.on('pulse', function(){
 //   console.log('........触发pulse事件')
 // })
+
+// 5 模块通信 emit on
+// 5-1 express app 通信
+// const express = require('express')
+// const app = express()
+// const resRouter = require('./module')
+
+// app.on('hello-alert', function(){
+//   console.warn('Warning')
+// })
+// app.get('/', resRouter)
+
+// app.listen(3000)
+
+// 5-2 redis 通信
+const redis = require('redis')
+const client = redis.createClient()
+
+client.on('error', function(err){
+  console.error('error:', err)
+})
+client.on('monitor', function(timestamp, args) {
+  console.log('time:', timestamp, 'arguments:', args)
+})
+client.on('ready', function(){
+  console.log('start app here')
+})
+
+// 6 事件名过多 统一管理
+
+// 7 第三方模块+扩展
+// 7-1 发布订阅模式 水平扩展分布式集群 rabbitMQ
+const rabbitHub = require('rabbitmq-nodejs-client')
+const subHub = rabbitHub.create({ task: 'sub', channel: 'myChannel' })//订阅
+const pubHub = rabbitHub.create({ task: 'pub', channel: 'myChannel' })//发布
+
+subHub.on('connection', function(hub){
+  hub.on('message', function(msg) {
+    console.log(msg)
+  }.bind(this))
+})
+subHub.connect()
+
+pubHub.on('connection', function(hub){
+  hub.send('hello world')
+})
+pubHub.connect()
