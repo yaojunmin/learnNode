@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.3",
     "rabbitmq-nodejs-client": "^0.1.0",
-    "redis": "^4.0.4"
+    "redis": "^4.0.4",
+    "zlib": "^1.0.5"
   }
 }

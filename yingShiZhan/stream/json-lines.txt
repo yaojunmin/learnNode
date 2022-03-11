@@ -1,0 +1,12 @@
+{
+	"pageNumber": 1,
+	"pageSize": 10,
+	"hospCode": "",
+	"type": 6,
+	"status": 0,
+	"stdOrgCode": "N81593471727",
+	"processTimeStart": "2022-03-10",
+	"processTimeEnd": "2022-03-10",
+	"processStatus": 2,
+	"tenantCode": "N81593471727"
+}
