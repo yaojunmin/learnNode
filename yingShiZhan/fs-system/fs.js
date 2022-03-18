@@ -49,13 +49,70 @@
 //   })
 // })
 // 3-3 完整创建锁文件模块
-import locker, { lock, unlock } from './module.js'
-console.log(locker, lock, unlock)
-locker.lock(err => {
-  console.log(1)
-  if (err) throw err
-  console.log(2)
-  locker.unlock(() => {
-    console.log(3)
-  })
-})
+// import locker, { lock, unlock } from './module.js'
+// console.log(locker, lock, unlock)
+// locker.lock(err => {
+//   console.log(1)
+//   if (err) throw err
+//   console.log(2)
+//   locker.unlock(() => {
+//     console.log(3)
+//   })
+// })
+
+// 4 递归文件操作
+// 4-1 findSync 同步
+// import fs from 'fs'
+// import { join } from 'path'
+
+// export const findSync = (nameRe, startPath) => {
+//   const results = []
+//   function finder(path) {
+//     const files = fs.readdirSync(path)
+//     for(let i = 0; i < files.length; i++) {
+//       const fpath = join(path, files[i])
+//       const stats = fs.statSync(fpath)
+//       if (stats.isDirectory()) finder(fpath)
+//       if (stats.isFile() && nameRe.test(files[i])) results.push(fpath) 
+//     }
+//   }
+//   finder(startPath)
+//   return results
+// }
+
+// 4-2 find 异步
+// import fs from 'fs'
+// import { join } from 'path'
+
+// export const find = (nameRe, startPath, cb) => {
+//   const results = []
+//   let asyncOps = 0
+//   let errored = false
+//   function error(err) {
+//     if (!errored) cb(err)
+//     errored = true
+//   }
+//   function finder(path) {
+//     asyncOps++
+//     fs.readdir((err, file) => {
+//       if (err) return error(err)
+//       files.forEach(file => {
+//         const fpath = join(path, file)
+//         asyncOps++;
+//         fs.stat(fpat, (err, stats) => {
+//           if (err) return error(err)
+//           if (stats.isDirectory()) finder(fpath)
+//           if (stats.isFile() && nameRe.test(file)) results.push(fpath)
+//           asyncOps--
+//           if (asyncOps === 0) cb(null, results)
+//         })
+//       })
+//       asyncOps--
+//       if (asyncOps === 0) cb(null, results)
+//     })
+//   }
+//   finder(startPath)
+// }
+
+// 5 文件数据库
+// 放弃！！！
