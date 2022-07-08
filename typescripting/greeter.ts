@@ -15,3 +15,4 @@ function greeter(person: Person) {
 
 let user = new Student('jane', 'm.', 'user')
 document.body.textContent = greeter(user)
+
