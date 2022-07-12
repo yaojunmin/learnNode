@@ -16,3 +16,10 @@ function greeter(person: Person) {
 let user = new Student('jane', 'm.', 'user')
 document.body.textContent = greeter(user)
 
+const aaa = new Promise((resolve, reject) => {
+  if (true) {
+    resolve(123)
+  } else {
+    reject(false)
+  }
+})
